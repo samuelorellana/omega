@@ -7,8 +7,8 @@
 	@include('Errores')
 
 	<div class="panel-heading">
-		<div class="container-fluid">
-			<h1>Registro de Persona</h1>
+		<div class="container-fluid">			
+			<h1><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a>  Registro de Persona</h1>
 		</div>
 	</div>
 

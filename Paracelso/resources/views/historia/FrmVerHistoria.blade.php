@@ -5,7 +5,7 @@
 	@include('Errores')	
 
 	<div class="panel-heading">
-		<h3><strong>Historia Clinica:</strong></h3>
+		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> <strong>Historia Clinica:</strong></h3>
 		@include('persona.LstDatosBasicos')
 	</div>
 

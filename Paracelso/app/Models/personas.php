@@ -59,4 +59,9 @@ class personas extends Model
     {
         return $this->hasOne(personas_imagenes::class,'id_persona','id_persona');
     }
+
+    public function orden_internacion()
+    {
+        return $this->hasMany(ordenes_internacion::class,'id_persona','id_persona');
+    }
 }

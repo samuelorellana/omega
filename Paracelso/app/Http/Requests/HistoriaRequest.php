@@ -12,7 +12,7 @@ class HistoriaRequest extends Request
      * @return bool
      */
     public function authorize()
-    {
+    {        
         return true;
     }
 
