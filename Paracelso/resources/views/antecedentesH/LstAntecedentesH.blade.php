@@ -7,7 +7,15 @@
         <tbody>
             @foreach($antecedentes as $antecedente)
             <tr>
-                <td>{{ $antecedente->tipo_antecedente }}</td>
+                @if($antecedente->tipo_antecedente == "TAHP")
+                    <td>PATOLOGICO</td>
+                @elseif($antecedente->tipo_antecedente == "TAHF")
+                    <td>FAMILIAR</td>
+                @elseif($antecedente->tipo_antecedente == "TAHQ")
+                    <td>QUIRURGICO</td>
+                @elseif($antecedente->tipo_antecedente == "TAHO")
+                    <td>OTRO TIPO</td>
+                @endif
                 <td>{{ $antecedente->descripcion }}</td>
                 <!-- <td><a href="#" onclick="eliminarN('{ $antecedente->id_antecedente_historia}}','antecedentesH','ListaAntecedentes')"> [Eliminar]</a></td> -->
                 <td><a href="#" onclick="eliminarN('{{ $antecedente->id_antecedente_historia}}')"> [Eliminar]</a></td>

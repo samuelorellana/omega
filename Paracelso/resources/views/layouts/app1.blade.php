@@ -90,7 +90,7 @@
         <ul class="nav nav-pills nav-stacked" role="menu">
           <li role="presentation"> <a href="{{ url('/cita') }}" class="textomenu">
             <div class="puntero"> <span class="glyphicon fui-calendar icono_menu"></span>
-              <p class="textomenu">Ag. Citas</p>
+              <p class="textomenu">Agenda</p>
             </div>
             </a>
           </li>
@@ -100,9 +100,9 @@
               <p class="textomenu">Pacientes</p>
             </div>
             </a></li>
-          <li role="presentation"> <a href="#reporte" class="textomenu">
+          <li role="presentation"> <a href="{{ route('internacion.index') }}" class="textomenu">
             <div class="puntero"> <span class="glyphicon fui-calendar-solid icono_menu"></span>
-              <p class="textomenu">Reportes</p>
+              <p class="textomenu">Internacion</p>
             </div>
             </a></li>
         </ul>
@@ -118,19 +118,10 @@
 <!-- /#page-content-wrapper -->
 
 <!-- Definicion de Footer Paracelso -->
-<footer>
-<div class="footer"> 
-  <div class="container">
-      <p>
-      <small><span class="fui-location"> </span> Edif. CES, Of. #204, Obrajes calle 6, La Paz - Bolivia    </small>
-      <small><span class="fui-chat"> </span> (+591) 720 00301 / (+591) 673 13333    </small>
-      <small><span class="fui-mail"> </span>gerencia@timnetbo.com / soporte@timnetbo.com</small>
-      </p>
-  </div>
- </div>
- 
+
+@include('layouts.pie')
  <!-- Se deden definir los iconos sociales a la derecha y derechos reservados por debajo -->
-</footer>
+
 <!-- Final de Footer -->
 
 
@@ -148,12 +139,6 @@
 
     <!-- Fullcalendar Js -->
     @yield('calendarioJS')
-    
-    {{-- <script>
-        function abrirVentana(url) {
-            window.open(url, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, fullscreen=yes");
-        }
-    </script> --}}
     
     @yield('javascript')
 

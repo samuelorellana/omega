@@ -29,7 +29,6 @@
     <!-- Bootstrap Core JavaScript -->
     {!! Html::script('js/bootstrap.min.js') !!}
 
-
 </body>
 
 </html>

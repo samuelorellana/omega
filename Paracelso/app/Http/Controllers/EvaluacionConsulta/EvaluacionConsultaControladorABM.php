@@ -19,9 +19,30 @@ class EvaluacionConsultaControladorABM extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // $id_persona = session()->get('id_persona');
+        // //se obtiene el id de la persona de trabajo
+
+        // //viene de btn crearDocs en frmcrearconsulta
+        // if($request->ajax())
+        // {
+        //     if($request->opcion == 'TPCI' || $request->opcion =='TPCY')
+        //     {
+        //         return "internacion";
+        //     }
+        //     elseif($request->opcion == 'TPCC')
+        //     {
+        //         //OPCION : CONTROL EN CONSULTA
+        //         session(['codigo_transaccion'=>'500']);
+        //         //se carga codigo de transaccion para crear cita
+        //         return response()->json(['success'=>'true','id'=>$id_persona,'mensaje'=>'Cita para Control en Consultorio']);
+        //     }
+        //     elseif($request->opcion == 'TPCT')
+        //     {
+        //         return "transferencia";
+        //     }
+        // }
     }
 
     /**
@@ -73,7 +94,7 @@ class EvaluacionConsultaControladorABM extends Controller
     public function show($id)
     {
         //
-    }
+   }
 
     /**
      * Show the form for editing the specified resource.
@@ -102,7 +123,8 @@ class EvaluacionConsultaControladorABM extends Controller
             $id_bitacora= $bitacora->generar_bitacora('621');
             $request->merge(['id_bitacora' => $id_bitacora]);
 
-            $evaluacion=evaluaciones_consultas::where('id_consulta',$id)->first();
+            $evaluacion=evaluaciones_consultas::FindOrFail($id);
+
             $input=$request->all();
             $resultado=$evaluacion->fill($input)->save(); 
 

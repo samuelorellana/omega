@@ -96,4 +96,10 @@ class CitaControlador extends Controller
     {
         return view('cita.LstCalendario');
     }
+
+    public function seleccionarC($id)
+    {
+        session(['codigo_transaccion' => '100']);
+        return redirect()->route('SeleccionarPersona',['id'=>$id]);
+    }
 }

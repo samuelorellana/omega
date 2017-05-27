@@ -25,7 +25,8 @@ class EvaluacionRequest extends Request
     {
         return [
             'laboratorio'=>'string|max:300',
-            'gabinete'=>'string|max:300'
+            'gabinete'=>'string|max:300',
+            'tipo_conducta'=>'string'
         ];
     }
 }

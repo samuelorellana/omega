@@ -11,7 +11,7 @@ class evaluaciones_consultas extends Model
     protected $primaryKey = 'id_evaluacion_consulta';
     public $timestamps = false;
 
-    protected $fillable = ['id_bitacora','id_consulta','laboratorio','gabinete','estado'];
+    protected $fillable = ['id_bitacora','id_consulta','laboratorio','gabinete','estado','tipo_conducta'];
 
     public function consulta()
     {

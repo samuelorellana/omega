@@ -48,7 +48,8 @@ Route::group(['middleware' => ['auth']],function(){
 	route::get('/ConfirmarC/{id}',['as'=>'ConfirmarC','uses'=>'Citas\CitaControlador@ConfirmarC']);
 	route::post('/CalendarioCitas','Citas\CitaControlador@calendario');
 	route::get('Calendario',['as'=>'Calendario','uses'=>'Citas\CitaControlador@VistaCalendario']);
-	
+	route::get('/seleccionarC/{id}',['as'=>'seleccionarC','uses'=>'Citas\CitaControlador@seleccionarC']);
+
 	route::resource('historia','Historias\HistoriaControladorABM');
 	route::resource('alergia','Alergias\AlergiaControladorABM');
 	route::resource('diagnosticosH','DiagnosticosH\DiagnosticosHControladorABM');
@@ -63,8 +64,25 @@ Route::group(['middleware' => ['auth']],function(){
 	route::resource('ordenesL','OrdenesL\OrdenesLControladorABM');
 	route::resource('ordenesG','OrdenesG\OrdenesGControladorABM');
 	route::resource('tratamientosC','TratamientosC\TratamientosCControladorABM');
+	route::get('/consultamenu/{idc}/{idm}',['as'=>'consultamenu','uses'=>'Consultas\ConsultaControladorABM@consultamenu']);
+	route::get('/redireccion/{idc}/{idm}/{codigo}',['as'=>'redireccion','uses'=>'Consultas\ConsultaControladorABM@redireccion']);
+
+	route::resource('ordenesI','Internacion\OrdenesIControladorABM');
+	route::get('/ordeninternacion/{idc}/{idm}/{codigo}',['as'=>'ordeninternacion','uses'=>'Internacion\OrdenesIControladorABM@ordeninternacion']);
+
+	route::resource('ordenesT','Transferencia\OrdenesTControladorABM');
+	route::get('/ordentransferencia/{idc}/{idm}/{codigo}',['as'=>'ordentransferencia','uses'=>'Transferencia\OrdenesTControladorABM@ordentransferencia']);
+
+	route::resource('internacion','Internacion\InternacionesControladorABM');
+	route::get('crearinternacion',['as'=>'crearinternacion','uses'=>'Internacion\InternacionesControladorABM@crear']);
+	route::resource('sitiointernacion','Internacion\SitioInternacionControladorABM');
+	route::get('/crearsitiointernacion/{idi}/{idm}',['as'=>'crearsitiointernacion','uses'=>'Internacion\SitioInternacionControladorABM@crearsitiointernacion']);
+	route::get('/cambiarsitiointernacion/{idi}/{idm}',['as'=>'cambiarsitiointernacion','uses'=>'Internacion\SitioInternacionControladorABM@cambiarsitiointernacion']);
+	route::resource('evolucion','Internacion\EvolucionesControladorABM');
 
 	route::resource('medicion','Mediciones\MedicionesControladorABM');
 
 	route::resource('imagen','PictureController');
+
+	route::resource('expediente','ExpedientePersona');
 });
