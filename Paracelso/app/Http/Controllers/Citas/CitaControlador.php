@@ -99,6 +99,7 @@ class CitaControlador extends Controller
 
     public function seleccionarC($id)
     {   //evaluar este cambio
+        //linea vista
         session(['codigo_transaccion' => '100']);
         return redirect()->route('SeleccionarPersona',['id'=>$id]);
     }
