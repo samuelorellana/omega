@@ -5,7 +5,7 @@
 	@include('Errores')
 
 	<div class="panel-heading">
-		<h3><strong>Crear Consulta Medica para:</strong></h3>
+		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> <strong>Crear Consulta Medica para:</strong></h3>
 		@include('persona.LstDatosBasicos')
 	</div>
 
@@ -31,10 +31,10 @@
 						<div class="input-group">
 							<span class="input-group-addon">Medico</span>
 							<select class="form-control" id="id_medico" name="id_medico">
-							<option value="0">Seleccione un Medico</option>
-			            	@foreach ($medicos as $medico)
-			                    <option value="{{ $medico->id_medico }}">{{ $medico->personas->nombre }} {{ $medico->personas->ap_paterno }} {{ $medico->personas->ap_materno }}</option>
-			                 @endforeach
+								<option value="0">Seleccione un Medico</option>
+				            	@foreach ($medicos as $medico)
+				                    <option value="{{ $medico->id_medico }}">{{ $medico->personas->nombre }} {{ $medico->personas->ap_paterno }} {{ $medico->personas->ap_materno }}</option>
+				                 @endforeach
 			            	</select>
 						</div>
 					</div>
@@ -151,13 +151,22 @@
 								{!! Form::text('gabinete',null,['id'=>'gabinete','class'=>'form-control','placeholder'=>'Gab.Previos','onkeyup'=>'mayuscula(gabinete)']) !!}
 							</div>
 						</div>
+						{{-- <div class="form-group col-sm-3 col-md-3">
+							<div class="input-group">
+								<span class="input-group-addon">Conducta a Seguir</span>
+								{!! Form::select('tipo_conducta',$tipoConducta,null,['id'=>'tipo_conducta','class'=>'form-control']) !!}
+							</div>
+						</div> --}}
+						<div class="form-group">
+							{!! Form::hidden('tipo_conducta','TPCN',['id'=>'tipo_conducta','class'=>'form-control','placeholder'=>'conducta']) !!}
+						</div>
+
 						<div class="form-group">
 							{!! Form::hidden('estadoE','AC',['id'=>'estadoE','class'=>'form-control','placeholder'=>'Estado']) !!}
 						</div>
-						<div class="form-group col-sm-1 col-md-1">
+						<div class="form-group col-sm-2 col-md-2">
 							{!! link_to('#','Guardar',['id'=>'guardarE','class'=>'btn btn-primary btn-sm m-t-10']) !!}
-						</div>
-						
+						</div>						
 
 						<div class="form-group">
 							{!! Form::hidden('id_evaluacion','',['id'=>'id_evaluacion','class'=>'form-control','placeholder'=>'idc']) !!}
@@ -212,9 +221,16 @@
 						</div>
 					</div>
 
+					<div class="container-fluid">
+						<h4><a href="#" class="btn btn-primary" onclick="redireccion();">Finalizar Consulta</a></h4>
+						{{-- {!! link_to('#','Crear Documentacion Complementaria Para la Consulta Realizada',['id'=>'crearDocs','class'=>'btn btn-primary btn-sm m-t-10 disabledTab']) !!} --}}
+					</div>
+
 				</div>
 			</div>
 		</div>
+
+		
 	</div>
 </div>
 
@@ -347,6 +363,7 @@
 		var id_consulta = $('#id_consulta').val();
 		var laboratorio = $('#laboratorio').val();
 		var gabinete = $('#gabinete').val();
+		var tipo_conducta = $('#tipo_conducta').val();
 		
 		var estado = $('#estadoE').val();
 		
@@ -354,7 +371,7 @@
 
 		var url = "{{ route('evaluacionconsulta.store') }}";
 
-		var dataStringA = {id_consulta:id_consulta,laboratorio:laboratorio, gabinete:gabinete, estado:estado, token:token};
+		var dataStringA = {id_consulta:id_consulta,laboratorio:laboratorio, gabinete:gabinete, tipo_conducta:tipo_conducta, estado:estado, token:token};
 		
 		//alert(url);
 
@@ -368,13 +385,14 @@
 		  	{
 		  		if(data.success == 'true')
 		  		{
-		  			alert('Evaluacion se Guardo Correctamente. Siguiente : Diagnosticos');
+		  			alert('Evaluacion se Guardo Correctamente.');
 		  			$('#guardarE').addClass('disabledTab');
 		  			$('#btnDiagnosticos').removeClass('disabledTab');
 		  			$('#btnOrdenL').removeClass('disabledTab');
 		  			$('#btnOrdenG').removeClass('disabledTab');
 		  			$('#btnTratamientos').removeClass('disabledTab');
-		  			
+		  			$('#crearDocs').removeClass('disabledTab');
+
 		  			document.getElementById("id_evaluacion").setAttribute("value",JSON.stringify(data.id));
 		  			//listarAlergias();
 		  		}
@@ -386,6 +404,14 @@
 		});
 		e.preventDefault();
 	});
+
+	function redireccion()
+	{
+		var idc = $('#id_consulta').val();
+		var idm = $('#id_medico').val();
+		document.location.href = "{{ url('/consultamenu') }}/"+idc+"/"+idm+"";
+	}
+
 
 	//----------------------------------------------- DIAGNOSTICOS
 

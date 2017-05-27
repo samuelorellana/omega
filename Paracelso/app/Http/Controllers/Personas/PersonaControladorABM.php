@@ -66,6 +66,7 @@ class PersonaControladorABM extends Controller
     {
         //aqui debe ir codigo para las variables de session
         $codigo = session()->get('codigo');
+        if($codigo==""){$codigo='100';}
         $bitacora = new BitacoraControlador;
         $id_bitacora = $bitacora->generar_bitacora($codigo);
         $request->merge(['id_bitacora'=>$id_bitacora]);

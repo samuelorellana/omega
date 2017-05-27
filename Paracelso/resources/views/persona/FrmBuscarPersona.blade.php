@@ -11,6 +11,7 @@
 			</h1>
 		</div>
 		<div>
+			<a href="javascript:window.history.back();" class="btn btn-warning">Atras</a>
 			<a href="{{ route('persona.create') }}" class="btn btn-primary">+ Nuevo Registro</a>
 		</div>
 	</div>

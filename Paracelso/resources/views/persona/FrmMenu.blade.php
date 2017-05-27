@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container-fluid marco_trabajo">
-   <h3>Menu de Trabajo</h3>
+   <h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> Menu de Trabajo</h3>
    @include('persona.LstDatosBasicos')
 </div>
 
@@ -34,8 +34,8 @@
     </div>
 
     <!-- Boton Laboratorio -->
-    {{-- <div class="cuadro_menu_paciente col-md-2 col-sm-4"> <a href="#"> --}} {{-- {{ route('ordenesL.show',session('id_paciente')) }} --}}
-        {{-- <div class="imagen_menu"> <img class="img-responsive" src="{{ asset ('../imagenes/menu/microscopio_w.png') }}" alt="Laboratorio"></div>
+    {{-- <div class="cuadro_menu_paciente col-md-2 col-sm-4"> <a href="{{ route('consulta.index') }}"> 
+        <div class="imagen_menu"> <img class="img-responsive" src="{{ asset ('../imagenes/menu/microscopio_w.png') }}" alt="Laboratorio"></div>
         <h3 class="titulo_menu">Laboratorio</h3>
         <div class="texto_menu"><p><small>Resultados de Laboratorios</small></p></div>
         </a>
@@ -57,12 +57,12 @@
         </a>
     </div> --}}
     
-    {{-- <div class="cuadro_menu_paciente col-md-2 col-sm-4"> <a href="#">
+    <div class="cuadro_menu_paciente col-md-2 col-sm-4"> <a href="{{ route('expediente.show',session('id_persona')) }}">
         <div class="imagen_menu"> <img class="img-responsive" src="{{ asset ('../imagenes/menu/estadisticas_w.png') }}" alt="Otros"></div>
-        <h3 class="titulo_menu">Estadisticas</h3>
-        <div class="texto_menu"><p><small>Estasdisticas referidas al paciente</small></p></div>
+        <h3 class="titulo_menu">Expediente</h3>
+        <div class="texto_menu"><p><small>Historial Completo del Paciente</small></p></div>
         </a>
-    </div> --}}
+    </div>
 </div>
 
 @endsection

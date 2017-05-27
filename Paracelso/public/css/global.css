@@ -494,14 +494,28 @@ label {
   margin-top: 3px;
 }
 
+
+#pie{
+  background-color: #edeff1;
+  color: #9AA4AF;
+  font-size: 15px;
+  /*bottom: 0;
+  width: 100%;
+  position: absolute;*/
+  height: 50px;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  width:100%;
+}
+
 footer {
   background-color: #edeff1;
   color: #34495E;
   font-size: 15px;
-  padding: 0;
-  position: absolute;
   bottom: 0;
   width: 100%;
+  position: absolute;
   height: 50px;
 }
 footer a {
