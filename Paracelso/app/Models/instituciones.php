@@ -45,4 +45,9 @@ class instituciones extends Model
     {
         return $this->hasMany(consultas::class,'codigo_institucion','codigo_institucion');
     }
+
+    public function orden_internacion()
+    {
+        return $this->hasMany(ordenes_internacion::class,'codigo_institucion','codigo_institucion');
+    }
 }

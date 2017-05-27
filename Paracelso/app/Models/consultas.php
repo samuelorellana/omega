@@ -17,7 +17,7 @@ class consultas extends Model
 
     public function setFechaHoraAttribute($date)
     {
-    	$this->attributes['fecha_hora'] = Carbon::parse($date);
+    	$this->attributes['fecha'] = Carbon::parse($date);
     }
 
     public function setHoraAttribute($time)
@@ -63,5 +63,10 @@ class consultas extends Model
     public function ordenesG()
     {
         return $this->hasMany(ordenes_gabinetes::class,'id_consulta','id_consulta');
+    }
+
+    public function orden_internacion()
+    {
+        return $this->hasOne(ordenes_internacion::class,'id_consulta','id_consulta');
     }
 }

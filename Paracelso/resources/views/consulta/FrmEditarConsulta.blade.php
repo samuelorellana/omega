@@ -5,7 +5,7 @@
 	@include('Errores')
 
 	<div class="panel-heading">
-		<h3><strong>Editar Consulta Medica para:</strong></h3>
+		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> <strong>Editar Consulta Medica para:</strong></h3>
 		@include('persona.LstDatosBasicos')
 	</div>
 
@@ -45,7 +45,7 @@
 					<div class="form-group col-sm-4 col-md-4">
 				    	<div class="input-group">
 				            <span class="input-group-addon">Motivo</span>
-							{!! Form::text('motivo_consulta',$consulta->motivo,['id'=>'motivo_consulta','class'=>'form-control','placeholder'=>'Motivo de Consulta','onkeyup'=>'mayuscula(motivo_consulta)']) !!}
+							{!! Form::text('motivo_consulta',$consulta->motivo_consulta,['id'=>'motivo_consulta','class'=>'form-control','placeholder'=>'Motivo de Consulta','onkeyup'=>'mayuscula(motivo_consulta)']) !!}
 						</div>
 					</div>
 
@@ -141,16 +141,22 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					{!! Form::open(['id'=>'formEvaluacion']) !!}
-						<div class="form-group col-sm-5 col-md-5">
+						<div class="form-group col-sm-4 col-md-4">
 					    	<div class="input-group">
 					            <span class="input-group-addon">Lab.Previos</span>
 								{!! Form::text('laboratorio',$evaluacion->laboratorio,['id'=>'laboratorio','class'=>'form-control','placeholder'=>'Lab.Previos','onkeyup'=>'mayuscula(laboratorio)']) !!}
 							</div>
 						</div>
-						<div class="form-group col-sm-5 col-md-5">
+						<div class="form-group col-sm-4 col-md-4">
 					    	<div class="input-group">
 					            <span class="input-group-addon">Gab.Previos</span>
 								{!! Form::text('gabinete',$evaluacion->gabinete,['id'=>'gabinete','class'=>'form-control','placeholder'=>'Gab.Previos','onkeyup'=>'mayuscula(gabinete)']) !!}
+							</div>
+						</div>
+						<div class="form-group col-sm-3 col-md-3">
+							<div class="input-group">
+								<span class="input-group-addon">Conducta</span>
+								{!! Form::select('tipo_conducta',$tipoConducta,$evaluacion->tipo_conducta,['id'=>'tipo_conducta','class'=>'form-control']) !!}
 							</div>
 						</div>
 						<div class="form-group">
@@ -239,7 +245,7 @@
 		listarDiagnosticos();
 		listarOrdenesL();
 		listarOrdenesG();
-		ListaTratamientos();
+		listarTratamientos();
 	});
 
 	$('#mostrarP').click(function(){
@@ -256,6 +262,7 @@
 
 	//--------------------- CONSULTA
 	$('#guardarConsulta').on('click',function(e){
+		var id_consulta = $('#id_consulta').val();
 		var id_consultorio = $('#id_consultorio').val();
 		var id_medico = $('#id_medico').val();		
 		var tipo_consulta = $('#tipo_consulta').val();
@@ -282,8 +289,8 @@
 		  	{
 		  		if(data.success == 'true')
 		  		{
-		  			alert('Consulta se Guardo Correctamente!');
-		  			$('#guardarConsulta').addClass('disabledTab');
+		  			alert('Consulta se Actualizo Correctamente!');
+		  			//$('#guardarConsulta').addClass('disabledTab');
 
 		  			//$('#Tab2').removeClass('disabledTab');
 
@@ -335,8 +342,8 @@
 		  	{
 		  		if(data.success == 'true')
 		  		{
-		  			alert('Revision se Guardo Correctamente!');
-		  			$('#guardarR').addClass('disabledTab');
+		  			alert('Revision se Actualizo Correctamente!');
+		  			//$('#guardarR').addClass('disabledTab');
 		  			//$('#Tab3').removeClass('disabledTab');
 		  			//listarAlergias();
 		  		}
@@ -353,17 +360,18 @@
 
 	$('#guardarE').on('click',function(e){
 
-		var id_consulta = $('#id_consulta').val();
+		var id = $('#id_evaluacion').val();
 		var laboratorio = $('#laboratorio').val();
 		var gabinete = $('#gabinete').val();
+		var tipo_conducta = $('#tipo_conducta').val();
 		
 		var estado = $('#estadoE').val();
 		
 		var token = $("input[name=_token]").val();
 
-		var url = "{{ url('evaluacion') }}/"+id_consulta+"";
+		var url = "{{ url('evaluacionconsulta') }}/"+id+"";
 
-		var dataStringA = {id_consulta:id_consulta,laboratorio:laboratorio, gabinete:gabinete, estado:estado, token:token};
+		var dataStringA = {laboratorio:laboratorio, gabinete:gabinete, estado:estado, tipo_conducta:tipo_conducta, token:token};
 		
 		//alert(url);
 
@@ -377,11 +385,11 @@
 		  	{
 		  		if(data.success == 'true')
 		  		{
-		  			alert('Evaluacion se Guardo Correctamente. Siguiente : Diagnosticos');
-		  			$('#guardarE').addClass('disabledTab');
+		  			alert('Evaluacion se Actualizo Correctamente.');
+		  			//$('#guardarE').addClass('disabledTab');
 		  			//$('#Tab4').removeClass('disabledTab');
 		  			
-		  			document.getElementById("id_evaluacion").setAttribute("value",JSON.stringify(data.id));
+		  			//document.getElementById("id_evaluacion").setAttribute("value",JSON.stringify(data.id));
 		  			//listarAlergias();
 		  		}
 		  	},

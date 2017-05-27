@@ -41,4 +41,9 @@ class medicos extends Model
     {
         return $this->hasMany(consultas::class,'id_medico','id_medico');
     }
+
+    public function orden_internacion()
+    {
+        return $this->hasMany(ordenes_internacion::class,'id_medico','id_medico');
+    }
 }

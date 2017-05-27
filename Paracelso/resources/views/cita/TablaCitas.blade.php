@@ -25,9 +25,10 @@
                             <td>REALIZADA</td>
                         @endif
                         <td>
-                            <a href="{{ route('cita.edit',$cita->id_cita) }}">Editar</a>
+                            <a href="{{ url('seleccionarC',[$cita->personas->id_persona]) }}">[Seleccionar] </a>
+                            <a href="{{ route('cita.edit',$cita->id_cita) }}">[Editar] </a>
                             {{-- <a href="#" onClick="eliminar('{{ $cita->id_cita }}')">Cancelar Cita</a> --}}
-                            <a href="{{ url('/CancelarCita',[$cita->id_cita]) }}">Cancelar</a>
+                            <a href="{{ url('/CancelarCita',[$cita->id_cita]) }}">[Cancelar] </a>
                             {{-- <a href="{{ url('/SeleccionarPersona', [$cita->personas->id_persona,'100']) }}">Seleccionar </a> --}}
                         </td>
                     </tr>

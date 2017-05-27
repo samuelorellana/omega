@@ -28,7 +28,8 @@ class ConsultaControladorABM extends Controller
      */
     public function index()
     {
-        //
+        $id_consulta=0;
+        return view('consulta.FrmMenuFinConsulta',compact('id_consulta'));
     }
 
     /**
@@ -46,9 +47,10 @@ class ConsultaControladorABM extends Controller
         $tipoLaboratorio = Dominio::nombre('TIPO LABORATORIO')->lists('descripcion','codigo_dominio');
         $tipoGabinete = Dominio::nombre('TIPO GABINETE')->lists('descripcion','codigo_dominio');
         $tipoTratamiento = Dominio::nombre('TIPO TRATAMIENTO')->lists('descripcion','codigo_dominio');
+        $tipoConducta = Dominio::nombre('TIPO CONDUCTA')->lists('descripcion','codigo_dominio');
         $medicamentos = medicamentos::orderBy('nombre_medico','asc')->get();
 
-        return view('consulta.FrmCrearConsulta',compact('fecha','medicos','tipoConsulta','tipoDiagnostico','tipoLaboratorio','tipoGabinete','tipoTratamiento','medicamentos'));
+        return view('consulta.FrmCrearConsulta',compact('fecha','medicos','tipoConsulta','tipoDiagnostico','tipoLaboratorio','tipoGabinete','tipoTratamiento','tipoConducta','medicamentos'));
 
     }
 
@@ -95,15 +97,15 @@ class ConsultaControladorABM extends Controller
     {
         $fecha = Carbon::now()->format('Y-m-d');
 
-        $consulta = consultas::where('fecha',$fecha)
+        $consultas = consultas::where('fecha',$fecha)
         ->where('id_persona',$id)
-        ->first();
+        ->get();
 
+        //$numero = count($consultas);
 
-        if($consulta != null)
+        if(!$consultas->isEmpty())
         {
-            $idc = $consulta->id_consulta;
-            return view('consulta.FrmOpcionConsulta',compact('fecha','idc'));
+            return view('consulta.FrmOpcionConsulta',compact('fecha','consultas'));
         }
         else
         {
@@ -128,13 +130,14 @@ class ConsultaControladorABM extends Controller
         $tipoLaboratorio = Dominio::nombre('TIPO LABORATORIO')->lists('descripcion','codigo_dominio');
         $tipoGabinete = Dominio::nombre('TIPO GABINETE')->lists('descripcion','codigo_dominio');
         $tipoTratamiento = Dominio::nombre('TIPO TRATAMIENTO')->lists('descripcion','codigo_dominio');
+        $tipoConducta = Dominio::nombre('TIPO CONDUCTA')->lists('descripcion','codigo_dominio');
         $medicamentos = medicamentos::orderBy('nombre_medico','asc')->get();
         $consulta = consultas::FindOrFail($id);
         $revision = revisiones_consultas::where('id_consulta',$id)->first();
         $evaluacion = evaluaciones_consultas::where('id_consulta',$id)->first();
         //return $consulta;
 
-        return view('consulta.FrmEditarConsulta',compact('fecha','consulta','revision','evaluacion','medicos','tipoConsulta','tipoDiagnostico','tipoLaboratorio','tipoGabinete','tipoTratamiento','medicamentos'));
+        return view('consulta.FrmEditarConsulta',compact('fecha','consulta','revision','evaluacion','medicos','tipoConsulta','tipoDiagnostico','tipoLaboratorio','tipoGabinete','tipoTratamiento','tipoConducta','medicamentos'));
     }
 
     /**
@@ -181,5 +184,23 @@ class ConsultaControladorABM extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //nuevo
+    public function consultamenu($idc,$idm)
+    {
+        $id_consulta=$idc;
+        $id_medico=$idm;
+        return view('consulta.FrmMenuFinConsulta',compact('id_consulta','id_medico'));
+    }
+
+    public function redireccion($idc,$idm,$codigo)
+    {
+        if($codigo == 500)
+        {
+            session(['codigo_transaccion'=>$codigo]);
+            return redirect()->route('SeleccionarPersona',session()->get('id_persona'));
+        }
+        
     }
 }

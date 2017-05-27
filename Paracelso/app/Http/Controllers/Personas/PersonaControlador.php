@@ -64,7 +64,12 @@ class PersonaControlador extends Controller
 
             case '500':
                 return redirect()->route('crearcita');
-                
+            
+            case '900':
+                return redirect()->route('crearinternacion');
+            
+            default:
+                return ('no hay transaccion origen');
             break;
         }
 
