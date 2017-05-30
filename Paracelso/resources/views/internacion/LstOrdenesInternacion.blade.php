@@ -41,7 +41,8 @@
 		                        <td>{{ $ordeni->lugar_internacion }}</td>
 		                        <td>{{ $ordeni->medico->personas->nombre }} {{ $ordeni->medico->personas->ap_paterno }}</td>               
 		                        <td>
-		                            <a href="{{ route('ordenesI.show',$ordeni->id_orden_internacion) }}">Internar</a>
+		                            {{-- <a href="{{ route('ordenesI.show',$ordeni->id_orden_internacion) }}">Internar</a> --}}
+		                            <a href="#" onclick="confirmar('{{ $ordeni->id_orden_internacion }}');">Internar</a>
 		                        </td>
 		                    </tr>
 		                    @endforeach
@@ -63,3 +64,22 @@
 
 
 @endsection
+
+@section('javascript')
+<script>
+
+	var confirmar = function(id)
+	{
+		if(confirm('Desea crear Internacion para este paciente?...\n(Importante: al continuar se eliminara esta orden pendiente) \n *** NO SE PUEDE DESHACER ESTA ELIMINACION! ***')==true)
+		{
+			document.location.href = "{{ url('/ordenesI/show') }}/"+id+"";
+		}
+		else
+		{
+			alert('La orden aun esta pendiente...');
+		}
+	}
+	
+</script>
+
+@stop

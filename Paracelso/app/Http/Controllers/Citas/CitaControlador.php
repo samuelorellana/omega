@@ -12,7 +12,6 @@ use App\Http\Controllers\Controller;
 use App\Repositories\CitaRepository;
 use App\Repositories\PersonaRepository;
 
-use App\Models\medicos;
 use App\Models\citas;
 
 class CitaControlador extends Controller
@@ -28,7 +27,7 @@ class CitaControlador extends Controller
     //
     public function crear()
     {
-        $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
         return view('cita.FrmCrearCita',compact('medicos'));
     }
 
@@ -98,8 +97,7 @@ class CitaControlador extends Controller
     }
 
     public function seleccionarC($id)
-    {   //evaluar este cambio
-        //linea vista
+    {
         session(['codigo_transaccion' => '100']);
         return redirect()->route('SeleccionarPersona',['id'=>$id]);
     }

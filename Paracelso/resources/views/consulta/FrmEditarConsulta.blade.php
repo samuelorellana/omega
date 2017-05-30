@@ -28,16 +28,9 @@
 						</div>
 					</div>
 					<div class="form-group col-sm-6 col-md-6">
-						<label for="">Medico Responsable Registrado:</label>
-						<label for="">{{ $consulta->medico->personas->nombre }} {{ $consulta->medico->personas->ap_paterno }}</label>
 						<div class="input-group">
 							<span class="input-group-addon">Medico</span>
-							<select class="form-control" id="id_medico" name="id_medico">
-							<option value="0">Seleccione un Medico</option>
-			            	@foreach ($medicos as $medico)
-			                    <option value="{{ $medico->id_medico }}">{{ $medico->personas->nombre }} {{ $medico->personas->ap_paterno }} {{ $medico->personas->ap_materno }}</option>
-			                 @endforeach
-			            	</select>
+							{!! Form::select('id_medico',$medicos,$consulta->medico->id_medico,['id'=>'id_medico','class'=>'form-control']) !!}
 						</div>
 					</div>
 				{{-- </div> --}}

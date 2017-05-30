@@ -35,6 +35,13 @@
 				<div class="form-group col-md-3">
 					<div class="input-group">
 						<span class="input-group-addon">Medico</span>
+						{!! Form::select('id_medico',$medicos,null,['id'=>'id_medico','class'=>'form-control']) !!}
+					</div>
+				</div>
+
+				{{-- <div class="form-group col-md-3">
+					<div class="input-group">
+						<span class="input-group-addon">Medico</span>
 						<select class="form-control" id="id_medico" name="id_medico">
 						<option value="0">Seleccione un Medico</option>
 		            	@foreach ($medicos as $medico)
@@ -42,7 +49,7 @@
 		                @endforeach
 		                </select>
 					</div>
-				</div>
+				</div> --}}
 
 				<div class="col-md-3">
 	                <button id="botonBuscarCitas" type="button" class="btn btn-primary"> Buscar 

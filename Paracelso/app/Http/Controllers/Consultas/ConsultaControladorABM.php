@@ -11,16 +11,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Administracion\BitacoraControlador;
 
 use App\Models\consultas;
-use App\Models\medicos;
 use App\Models\Dominio;
 use App\Models\medicamentos;
 use App\Models\revisiones_consultas;
 use App\Models\evaluaciones_consultas;
 
 use Carbon\Carbon;
+use App\Repositories\PersonaRepository;
 
 class ConsultaControladorABM extends Controller
 {
+    protected $personas;
+
+    public function __construct(PersonaRepository $personas)
+    {
+        $this->personas = $personas;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +47,7 @@ class ConsultaControladorABM extends Controller
     {
         Carbon::setLocale('es');
         $fecha=Carbon::now();
-        $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
         $tipoConsulta = Dominio::nombre('TIPO CONSULTA')->lists('descripcion','codigo_dominio');
         $tipoDiagnostico = Dominio::nombre('TIPO DIAGNOSTICO')->lists('descripcion','codigo_dominio');
         $tipoLaboratorio = Dominio::nombre('TIPO LABORATORIO')->lists('descripcion','codigo_dominio');
@@ -124,7 +130,7 @@ class ConsultaControladorABM extends Controller
         //
         Carbon::setLocale('es');
         $fecha=Carbon::now();
-        $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
         $tipoConsulta = Dominio::nombre('TIPO CONSULTA')->lists('descripcion','codigo_dominio');
         $tipoDiagnostico = Dominio::nombre('TIPO DIAGNOSTICO')->lists('descripcion','codigo_dominio');
         $tipoLaboratorio = Dominio::nombre('TIPO LABORATORIO')->lists('descripcion','codigo_dominio');

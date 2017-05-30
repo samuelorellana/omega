@@ -7,6 +7,7 @@
 	<div class="panel-heading">
 		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> <strong>Historia Clinica:</strong></h3>
 		@include('persona.LstDatosBasicos')
+		<button type="button" id="boton1">boton</button>
 	</div>
 
 	<div class="panel-body">
@@ -112,6 +113,10 @@
 			listarAnamnesis();
 		});
 
+		//boton
+		$('#boton1').on('click',function(e){
+			alert.confirm('hola');
+		})
 		//----------------------------- ALERGIAS
 		$('#guardarAlergia').on('click',function(e){
 
@@ -330,14 +335,14 @@
 
 			var id_historia = $('#id_historia').val();
 			var tipo = $('#tipo_habito').val();
-			var descripcionh = $('#descripcionh').val();
+			var descripcion = $('#descripcionh').val();
 			var estado = $('#estadoNP').val();
 			
 			var token = $("input[name=_token]").val();
 
 			var url = "{{ route('anamnesisH.store') }}";
 
-			var dataStringA = {id_historia:id_historia, tipo:tipo, descripcionh:descripcionh, estado:estado, token:token};
+			var dataStringA = {id_historia:id_historia, tipo:tipo, descripcion:descripcion, estado:estado, token:token};
 			
 			//alert(url);
 
@@ -381,9 +386,11 @@
 
 		var eliminarA = function (id)
 		{
-			alert.confirm('Esta a punto de eliminar el registro seleccionado').then(function(){
+			if(confirm("Esta seguro de eliminar el registro seleccionado?") == true)
+			{
 				var rutaEA= "{{ url('alergia') }}/"+id+"";
-				var token= $('#token').val();
+				var token = $("input[name=_token]").val();
+				//var token= $('#token').val();
 				$.ajax({
 					url:rutaEA,
 					headers:{'X-CSRF-TOKEN': token},
@@ -401,14 +408,15 @@
 						
 				  	}
 				});
-			});
+			}
 		}
 
 		var eliminarD = function (id)
 		{
-			alert.confirm('Esta a punto de eliminar el registro seleccionado').then(function(){
+			if(confirm("Esta seguro de eliminar el registro seleccionado?")==true)
+			{
 				var rutaEA= "{{ url('diagnosticosH') }}/"+id+"";
-				var token= $('#token').val();
+				var token = $("input[name=_token]").val();
 				$.ajax({
 					url:rutaEA,
 					headers:{'X-CSRF-TOKEN': token},
@@ -426,14 +434,15 @@
 						
 				  	}
 				});
-			});
+			}
 		}
 
 		var eliminarT = function (id)
 		{
-			alert.confirm('Esta a punto de eliminar el registro seleccionado').then(function(){
+			if(confirm("Esta seguro de eliminar el registro seleccionado?")==true)
+			{
 				var rutaEA= "{{ url('tratamientosH') }}/"+id+"";
-				var token= $('#token').val();
+				var token = $("input[name=_token]").val();
 				$.ajax({
 					url:rutaEA,
 					headers:{'X-CSRF-TOKEN': token},
@@ -451,14 +460,15 @@
 						
 				  	}
 				});
-			});
+			}
 		}
 
 		var eliminarN = function (id)
 		{
-			alert.confirm('Esta a punto de eliminar el registro seleccionado').then(function(){
+			if(confirm("Esta seguro de eliminar el registro seleccionado?")==true)
+			{
 				var rutaEA= "{{ url('antecedentesH') }}/"+id+"";
-				var token= $('#token').val();
+				var token = $("input[name=_token]").val();
 				$.ajax({
 					url:rutaEA,
 					headers:{'X-CSRF-TOKEN': token},
@@ -476,14 +486,15 @@
 						
 				  	}
 				});
-			});
+			}
 		}
 
 		var eliminarAN = function (id)
 		{
-			alert.confirm('Esta a punto de eliminar el registro seleccionado').then(function(){
+			if(confirm("Esta seguro de eliminar el registro seleccionado?")==true)
+			{
 				var rutaEA= "{{ url('anamnesisH') }}/"+id+"";
-				var token= $('#token').val();
+				var token = $("input[name=_token]").val();
 				$.ajax({
 					url:rutaEA,
 					headers:{'X-CSRF-TOKEN': token},
@@ -501,7 +512,7 @@
 						
 				  	}
 				});
-			});
+			}
 		}
 	</script>
 @stop
