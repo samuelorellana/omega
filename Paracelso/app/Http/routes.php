@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth']],function(){
 
 	route::resource('ordenesI','Internacion\OrdenesIControladorABM');
 	route::get('/ordeninternacion/{idc}/{idm}/{codigo}',['as'=>'ordeninternacion','uses'=>'Internacion\OrdenesIControladorABM@ordeninternacion']);
+	route::get('/ejecutarinternacion/{id}',['as'=>'ejecutarinternacion','uses'=>'Internacion\OrdenesIControladorABM@ejecutarinternacion']);
 
 	route::resource('ordenesT','Transferencia\OrdenesTControladorABM');
 	route::get('/ordentransferencia/{idc}/{idm}/{codigo}',['as'=>'ordentransferencia','uses'=>'Transferencia\OrdenesTControladorABM@ordentransferencia']);

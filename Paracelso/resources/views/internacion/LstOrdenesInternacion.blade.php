@@ -72,7 +72,7 @@
 	{
 		if(confirm('Desea crear Internacion para este paciente?...\n(Importante: al continuar se eliminara esta orden pendiente) \n *** NO SE PUEDE DESHACER ESTA ELIMINACION! ***')==true)
 		{
-			document.location.href = "{{ url('/ordenesI/show') }}/"+id+"";
+			document.location.href = "{{ url('ordenesI') }}/"+id+"";
 		}
 		else
 		{

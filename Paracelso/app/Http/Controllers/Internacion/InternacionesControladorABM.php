@@ -13,13 +13,19 @@ use App\Http\Controllers\Administracion\BitacoraControlador;
 
 use App\Models\ordenes_internacion;
 use App\Models\Dominio;
-use App\Models\medicos;
 use App\Models\internaciones;
 
 use Carbon\Carbon;
+use App\Repositories\PersonaRepository;
 
 class InternacionesControladorABM extends Controller
 {
+    protected $personas;
+
+    public function __construct(PersonaRepository $personas)
+    {
+        $this->personas = $personas;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -136,7 +142,7 @@ class InternacionesControladorABM extends Controller
         Carbon::setLocale('es');
         $fecha=Carbon::now();
         $tipoInternacion = Dominio::nombre('TIPO INTERNACION')->lists('descripcion','codigo_dominio');
-        $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
 
         return view('internacion.FrmCrearInternacion',compact('fecha','tipoInternacion','medicos'));
     }
