@@ -82,11 +82,7 @@ class OrdenesIControladorABM extends Controller
     public function show($id)
     {
         //
-        $orden = ordenes_internacion::FindOrFail($id);
-        $orden->estado = "EJ";
-        $orden->save();
-
-        return redirect()->route('internacion.show',$orden->id_persona);
+        
     }
 
     /**
@@ -134,5 +130,14 @@ class OrdenesIControladorABM extends Controller
         $codigo_transaccion = $codigo;
 
         return view('internacion.FrmCrearOrdenInternacion',compact('fecha','tipoInternacion','id_consulta','id_medico','codigo_transaccion'));
+    }
+
+    public function ejecutarinternacion($id)
+    {
+        $orden = ordenes_internacion::FindOrFail($id);
+        $orden->estado = "EJ";
+        $orden->save();
+
+        return redirect()->route('internacion.show',$orden->id_persona);
     }
 }

@@ -140,8 +140,4 @@ class SitioInternacionControladorABM extends Controller
         //return view('internacion.FrmCrearNotaInternacion',['fecha'=>$fecha,'medicos'=>$medicos,'id_internacion'=>$idi,'id_medico'=>$idm,'tipoUnidad'=>$tipoUnidad,'tipoEvolucion'=>$tipoEvolucion,'tipoConducta'=>$tipoConducta]);
     }
 
-    public function ejecutarinternacion($id)
-    {
-        
-    }
 }
