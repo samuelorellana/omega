@@ -4,6 +4,9 @@
 	{!! Form::open(['id'=>'formSitioI']) !!}
 		{{-- <div class="row"> --}}
 			<div class="form-group">
+				{!! Form::hidden('unidad',$codigoUnidad,['id'=>'unidad','class'=>'form-control','placeholder'=>'Estado']) !!}
+			</div>
+			<div class="form-group">
 				{!! Form::hidden('id_internacion',$id_internacion,['id'=>'id_internacion','class'=>'form-control','placeholder'=>'Estado']) !!}
 			</div>
 			<div class="form-group">
@@ -11,11 +14,14 @@
 			</div>
 			
 			<div class="form-group col-sm-4 col-md-4">
-				@unless($codigoUnidad->isEmpty())
-					<label for="">Unidad de Origen : <strong>{{ $codigoUnidad }}</strong></label>
-				@endunless
+				
 				<div class="input-group">
-					<span class="input-group-addon">Unidad</span>
+					@unless($codigoUnidad->isEmpty())
+						<span class="input-group-addon">Origen :{{ $codigoUnidad }} >> Destino:</span>
+					@else
+						<span class="input-group-addon">Unidad :</span>
+					@endunless
+					
 					{!! Form::select('tipo_unidad',$tipoUnidad,null,['id'=>'tipo_unidad','class'=>'form-control']) !!}
 				</div>
 			</div>

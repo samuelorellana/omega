@@ -36,6 +36,6 @@ class Dominio extends Model
 
     public function scopeCodigo($query,$codigo)
     {
-        $query->where('codigo_dominio',$codigo)->first();
+        $query->where('codigo_dominio',$codigo)->get();
     }
 }

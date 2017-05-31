@@ -39,7 +39,9 @@ class InternacionesControladorABM extends Controller
         session()->forget('fecha_nacimiento');
 
         $ordenes = ordenes_internacion::where('estado','AC')->get();
-        return view('internacion.LstOrdenesInternacion',compact('ordenes'));
+        $internaciones = internaciones::where('estado','AC')->get();
+        return view('internacion.LstOrdenesInternacion',compact('ordenes','internaciones'));
+
     }
 
     /**

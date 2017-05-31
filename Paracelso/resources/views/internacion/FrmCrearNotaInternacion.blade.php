@@ -31,7 +31,7 @@
 		var fecha_hora = $('#fecha_hora').val();
 		var estado = $('#estado').val();
 		var token = $("input[name=_token]").val();
-
+		
 		var url = "{{ route('sitiointernacion.store') }}";
 
 		var dataString = {id_internacion:id_internacion, id_medico:id_medico, tipo_unidad:tipo_unidad, piso:piso, cama:cama, notas:notas, fecha_hora:fecha_hora, estado:estado, token:token};

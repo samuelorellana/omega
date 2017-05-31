@@ -28,6 +28,6 @@ class sitios_internaciones extends Model
 
     public function internacion()
     {
-    	return $this->belongsTo(personas::class,'id_internacion','id_internacion');
+    	return $this->belongsTo(internaciones::class,'id_internacion','id_internacion');
     }
 }
