@@ -11,6 +11,9 @@
 			</div>
 			
 			<div class="form-group col-sm-4 col-md-4">
+				@unless($codigoUnidad->isEmpty())
+					<label for="">Unidad de Origen : <strong>{{ $codigoUnidad }}</strong></label>
+				@endunless
 				<div class="input-group">
 					<span class="input-group-addon">Unidad</span>
 					{!! Form::select('tipo_unidad',$tipoUnidad,null,['id'=>'tipo_unidad','class'=>'form-control']) !!}
