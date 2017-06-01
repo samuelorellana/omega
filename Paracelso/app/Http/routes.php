@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware' => ['auth']],function(){
 
 	route::get('prueba',['as'=>'prueba','uses'=>'PruebaControlador@index']);
+	route::get('prueba2',['as'=>'prueba2','uses'=>'PruebaControlador@indexa']);
 
 	Route::resource('dominios','Parametricas\DominiosControlador');
 	Route::resource('seguros','Parametricas\SeguroControladorABM');

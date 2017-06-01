@@ -10,7 +10,6 @@ class sitios_internaciones extends Model
     //
     protected $table = 'sitio_internaciones';
     protected $primaryKey = 'id_sitio_internacion';
-    public $timestamps = false;
 
     protected $fillable = ['id_internacion','id_bitacora','id_medico','tipo_unidad','piso','cama','notas','fecha_hora','estado'];
 

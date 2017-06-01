@@ -62,7 +62,7 @@
 
 		<!-- lista de internaciones -->
 		<div class="container-fluid">
-			<h3>Ordenes de Internacion Existentes</h3>
+			<h3>Internaciones vigentes</h3>
 			<div class="table-responsive">
 		        <table class="table table-bordered table-condensed tabla_small">
 		            <thead>
@@ -73,15 +73,14 @@
 	                    <th>Tipo</th>
 	                    <th>Paciente</th>
 	                    <th>Medico</th>
-	                    <th>Conducta</th>
 	                </thead>
 		            <tbody>
 	                    @foreach($internaciones as $internacion)
 	                    <tr>
 	                    	<td>{{ $internacion->fecha_hora }}</td>
-	                    	<td>{{ $internacion->sitio->tipo_unidad }}</td>
-	                    	<td>{{ $internacion->sitio->piso }}</td>
-	                    	<td>{{ $internacion->sitio->cama }}</td>
+	                    	<td>{{ $internacion->ultimositio->tipo_unidad }}</td>
+	                    	<td>{{ $internacion->ultimositio->piso }}</td>
+	                    	<td>{{ $internacion->ultimositio->cama }}</td>
 	                        @if($internacion->tipo_internacion == "TIIM")
 	                            <td {{-- style="color: #009600;" --}}>TRATAMIENTO MEDICO</td>
 	                        @elseif($internacion->tipo_internacion == "TIIQ")
@@ -95,8 +94,7 @@
 	                        @endif
 	                        <td>{{ $internacion->persona->nombre }} {{ $internacion->persona->ap_paterno }}</td>
 	                        <td>{{ $internacion->medico->personas->nombre }} {{ $internacion->medico->personas->ap_paterno }}</td>
-	                        <td>{{ $internacion->tipo_conducta }}</td>
-	                        
+
 	                    </tr>
 	                    @endforeach
 	                </tbody>

@@ -10,7 +10,6 @@ class evoluciones extends Model
     //
     protected $table = 'evoluciones';
     protected $primaryKey = 'id_evolucion';
-    public $timestamps = false;
 
     protected $fillable = ['id_internacion','id_bitacora','id_medico','tipo_evolucion','subjetivo','objetivo','glasgow','frecuencia_cardiaca','frecuencia_respiratoria','presion_sistolica','presion_diastolica','peso','talla','temperatura','plan','tipo_conducta','fecha_hora','estado'];
 
@@ -28,6 +27,6 @@ class evoluciones extends Model
 
     public function internacion()
     {
-    	return $this->belongsTo(personas::class,'id_internacion','id_internacion');
+    	return $this->belongsTo(internaciones::class,'id_internacion','id_internacion');
     }
 }

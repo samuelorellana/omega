@@ -8,6 +8,7 @@ use App\Models\medicos;
 use App\Repositories\PersonaRepository;
 
 use App\Http\Requests;
+use App\Models\internaciones;
 
 class PruebaControlador extends Controller
 {
@@ -33,5 +34,12 @@ class PruebaControlador extends Controller
     	//dd($persona1);
     	$personal = $persona1->lists('nombreM','id_medico');
         return view('pruebas',compact('personal'));
+    }
+
+    public function indexa()
+    {
+        $internaciones = internaciones::where('estado','AC')->with('ultimositio')->get();
+
+        return view('prueba2',compact('internaciones'));
     }
 }
