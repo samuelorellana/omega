@@ -8,7 +8,7 @@
 
 	<div class="panel-heading">
 		<div class="container-fluid">			
-			<h1><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a>  Registro de Persona</h1>
+			<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a>  Registro de Persona</h3>
 		</div>
 	</div>
 
@@ -23,7 +23,7 @@
 					<div class="col-md-4">
 						<h4><b>Datos personales</b></h4>										
 
-						<div class="form-group">
+						<div class="form-group has-error">
 							<div class="input-group">
 								<span class="input-group-addon">Nombre</span>
 								{!! Form::text('nombre',null,['id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre(s)','onkeyup'=>'mayuscula(nombre)']) !!}
@@ -70,11 +70,11 @@
 								<span class="input-group-addon">Genero</span>
 								<div class="col-md-4 col-md-offset-2">
 									{!! Form::label('Masculino',null,['class'=>'control-label']) !!}
-									{!! Form::radio('sexo', 'M', array('id'=>'M')) !!}
+									{!! Form::radio('sexo', 'M',false, array('id'=>'M')) !!}
 								</div>
 								<div class="col-md-4 col-md-offset-2">
 									{!! Form::label('Femenino',null,['class'=>'control-label']) !!}
-									{!! Form::radio('sexo', 'F', array('id'=>'F')) !!}
+									{!! Form::radio('sexo', 'F',false, array('id'=>'F')) !!}
 								</div>
 							</div>
 												
@@ -87,22 +87,22 @@
 
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"># Telefono</span>
-								{!! Form::number('no_telefono',null,['id'=>'no_telefono','class'=>'form-control','placeholder'=>'# Telefono']) !!}
+								<span class="input-group-addon">Telefono</span>
+								{!! Form::number('no_telefono',null,['id'=>'no_telefono','class'=>'form-control','placeholder'=>'Telefono']) !!}
 							</div>						
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"># Celular</span>
-								{!! Form::number('no_celular',null,['id'=>'no_celular','class'=>'form-control','placeholder'=>'# Celular']) !!}
+								<span class="input-group-addon">Celular</span>
+								{!! Form::number('no_celular',null,['id'=>'no_celular','class'=>'form-control','placeholder'=>'Celular']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"># Telefono Trabajo</span>
-								{!! Form::number('no_telefono_trabajo',null,['id'=>'no_telefono_trabajo','class'=>'form-control','placeholder'=>'# Tel.Trabajo']) !!}
+								<span class="input-group-addon">Telefono Trabajo</span>
+								{!! Form::number('no_telefono_trabajo',null,['id'=>'no_telefono_trabajo','class'=>'form-control','placeholder'=>'Tel.Trabajo']) !!}
 							</div>
 						</div>
 

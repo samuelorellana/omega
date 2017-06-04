@@ -6,7 +6,7 @@
 
 	<div class="panel-heading">
 		<div class="container-fluid">
-			<h1>Agenda de Citas</h1>
+			<h3>Agenda de Citas</h3>
 		</div>
 		<div>
 		<a href="{{ route('cita.create') }}" class="btn btn-primary">Nueva Cita</a>

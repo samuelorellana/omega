@@ -121,6 +121,10 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row col-sm-6 col-md-6">
+			<a href="javascript:window.history.back();" class="btn btn-warning disabledTab" id="fin">Finalizar</a>
+		</div>
 	</div>
 </div>
 
@@ -137,7 +141,7 @@
 	<script>
 		$('#guardarHistoria').on('click',function(e)
 		{
-			alert('en proceso');
+			//alert('en proceso');
 			var id_medico = $('#id_medico').val();
 			var grupo_sanguineo = $('#grupo_sanguineo').val();
 			var nota = $('#nota').val();		
@@ -165,6 +169,8 @@
 			  			$('#btnTratamientos').removeClass('disabledTab');
 			  			$('#btnAntecedentes').removeClass('disabledTab');
 			  			$('#btnHabitos').removeClass('disabledTab');
+			  			$('#fin').removeClass('disabledTab');
+
 			  			document.getElementById("id_historia").setAttribute("value",JSON.stringify(data.id));
 			  			//alert(data.id);
 			  		}

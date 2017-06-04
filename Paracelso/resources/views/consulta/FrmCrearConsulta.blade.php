@@ -5,7 +5,7 @@
 	@include('Errores')
 
 	<div class="panel-heading">
-		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> <strong>Crear Consulta Medica para:</strong></h3>
+		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> Crear Consulta Medica para:</h3>
 		@include('persona.LstDatosBasicos')
 	</div>
 
@@ -80,7 +80,7 @@
 								{!! Form::text('revision_general',null,['id'=>'revision_general','class'=>'form-control','placeholder'=>'Revision fisica general','onkeyup'=>'mayuscula(revision_general)']) !!}
 							</div>
 						</div>
-						<button type="button" id="mostrarP" class="btn btn-primary btn-sm col-sm-2 col-md-2">Ex.Segmentario</button>
+						<button type="button" id="mostrarP" class="btn btn-info btn-sm col-sm-2 col-md-2">Ex.Segmentario</button>
 						<button type="button" id="ocultarP" class="btn btn-success btn-sm col-sm-2 col-md-2">Ocultar</button>
 
 						<div class="row container-fluid" id="EFS">
@@ -122,7 +122,9 @@
 							{!! Form::hidden('estadoR','AC',['id'=>'estadoR','class'=>'form-control','placeholder'=>'Estado']) !!}
 						</div>
 
-						{!! link_to('#','Guardar',['id'=>'guardarR','class'=>'btn btn-primary btn-sm m-t-10']) !!}
+						<div class="row">
+							{!! link_to('#','Guardar',['id'=>'guardarR','class'=>'btn btn-primary btn-sm m-t-10']) !!}
+						</div>
 					{!! Form::close() !!}
 				</div>
 			</div>

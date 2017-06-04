@@ -91,6 +91,10 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row col-sm-6 col-md-6">
+			<a href="javascript:window.history.back();" class="btn btn-warning" id="fin">Finalizar</a>
+		</div>
 	</div>
 </div>
 

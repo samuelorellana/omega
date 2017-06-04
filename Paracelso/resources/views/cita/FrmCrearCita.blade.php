@@ -2,12 +2,11 @@
 @section('content')
 
 <div class="container-fluid  marco_trabajo">
-    <h3><strong>Crear Cita para:</strong></h3>
+    <h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> Crear Cita para:</h3>
     @include('persona.LstDatosBasicos')
 </div>
 
-<div class="container-fluid  marco_trabajo">
-	<div class="row">
+<div class="container-fluid">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
 				@include('Errores')
@@ -69,7 +68,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 @endsection
