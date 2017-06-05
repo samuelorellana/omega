@@ -10,6 +10,7 @@ use App\Http\Requests\PersonaRequest;
 use App\Http\Controllers\Controller;
 
 use App\Models\personas;
+use App\Models\PersonaImagen;
 use App\Models\Dominio;
 
 use App\Http\Controllers\Administracion\BitacoraControlador;
@@ -73,6 +74,8 @@ class PersonaControladorABM extends Controller
         $request->merge(['codigo_institucion'=>Auth()->user()->codigo_institucion]);
 
         $persona=personas::create($request->all());
+
+        $this->RegistrarImagen($request,$persona->id_persona);
 
         Session::flash('mensaje','Persona se Registro correctamente!');
 
@@ -161,5 +164,62 @@ class PersonaControladorABM extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function RegistrarImagen($request,$id_persona)
+    {   
+        $foto=$request->file('imagenpersona');
+        //informacion basica
+        $personaimagen= new PersonaImagen;
+        
+         if ($request->file("imagenpersona")->isValid())
+            {   //REGISTRO DE BLOB CON LIBRERIAS
+                /*$datofoto = Input::file('imagen');
+                $data=Image::make($datofoto);
+                Response::make($data->encode('jpeg'));
+                $imagen->imagen=$data;*/
+                
+                //REGISTRO DE BLOB CON STANDARES DE PHP
+                $datofoto=fopen($request->file("imagenpersona"), "r");
+                $data= fread($datofoto,filesize($request->file("imagenpersona")));//$fotopersona;
+                $personaimagen->id_persona=$id_persona;
+                $personaimagen->imagen= pg_escape_bytea($data);
+                $personaimagen->estado='AC';
+                //este ultimo metodo trabaja mejor que el anterior debido a que esstandar asi tambien el tamaño de la imagen es el original
+             }
+
+        //$imagen->save();
+             $usuario=env('DB_USERNAME');
+             $password=env('DB_PASSWORD');
+             $bd=env('DB_DATABASE');
+             $conexion=pg_connect("host=localhost port=5432 dbname=$bd user=$usuario password=$password");
+            pg_query($conexion,"INSERT INTO paracelso.personas_imagenes (id_persona,imagen,estado) VALUES ($id_persona,'{$personaimagen->imagen}','AC')");
+
+        //DB::insert('insert into paracelso.personas_imagenes (id_persona, imagen,estado) values (:id_persona, :imagen,:estado)', ['id_persona'=>$id_persona,'imagen'=>pg_escape_bytea($personaimagen->imagen),'estado'=>'AC']);
+//        echo "La extension foto es ".$foto->guessExtension()." el tamaño es ".$foto->getClientSize()." el nombre original es ".$foto->getClientOriginalName() ;        
+    }
+    protected function DesplegarImagenPersona(Request $request,$id_persona)
+    {   
+        /*$ImagenPersona=PersonaImagen::where([   ['id_persona', '=',$id_persona],
+                                                    ])
+                    ->orderBy('id_persona', 'asc')
+                    ->get();*/
+        $usuario=env('DB_USERNAME');
+        $password=env('DB_PASSWORD');
+        $bd=env('DB_DATABASE');
+        $ImagenPersonas = PersonaImagen::findOrFail($id_persona); 
+        $conexion=pg_connect("host=localhost port=5432 dbname=$bd user=$usuario password=$password");
+        $resultado=pg_query($conexion,"SELECT * FROM paracelso.personas_imagenes WHERE id_persona=$id_persona");
+        $foto = pg_fetch_result($resultado, 'imagen');
+        //$foto=pg_unescape_bytea($ImagenPersona->imagen);
+        //dd($ImagenPersona->imagen);
+        /*foreach ($ImagenPersonas as $ImagenPersona) {
+            $foto=pg_unescape_bytea($ImagenPersona->imagen);
+        }*/
+        //$response->header('Content-Type', 'image/jpeg');
+        //$foto=pg_unescape_bytea($imagen);
+        header('Content-type: image/jpeg');
+        //print ($ImagenPersonas->imagen);        
+        print (pg_unescape_bytea($foto));        
+        
     }
 }
