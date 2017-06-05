@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']],function(){
 	route::resource('persona','Personas\PersonaControladorABM');
 	route::get('BuscarPersona/{page?}','Personas\PersonaControlador@BuscarPersona');
 	route::get('/SeleccionarPersona/{id_persona}',['as'=>'SeleccionarPersona','uses'=>'Personas\PersonaControlador@SeleccionarPersona']);
+	Route::get('/imagenpersona/{id_persona}','Personas\PersonaControladorABM@DesplegarImagenPersona');
 
 	route::resource('usuario','Administracion\UsuarioControladorABM');
 
