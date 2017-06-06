@@ -48,7 +48,7 @@ class CitaRepository
           else
             {
                 if($medico)
-                  { $busca = ['fecha'=>$fechaA,'id_medico'=>$medico]; }
+                  { $busca = ['id_medico'=>$medico]; }
                 else 
                   { $busca = ['fecha'=>$fechaA]; }
             }

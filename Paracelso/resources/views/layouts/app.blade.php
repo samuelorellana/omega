@@ -88,7 +88,8 @@
 
     <script type="text/javascript">
         function abrirVentana(url) {            
-            window.open(url, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, fullscreen=yes");
+            //window.open(url, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, fullscreen=yes");
+            window.open(url, "nuevo", "");
         }
     </script>
 

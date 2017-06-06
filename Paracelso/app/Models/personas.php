@@ -64,4 +64,9 @@ class personas extends Model
     {
         return $this->hasMany(ordenes_internacion::class,'id_persona','id_persona');
     }
+
+    public function internacion()
+    {
+        return $this->hasMany(internaciones::class,'id_persona','id_persona');
+    }
 }

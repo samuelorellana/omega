@@ -10,195 +10,10 @@
 	</div>
 
 	<div class="panel-body">
-		<div class="row container-fluid">
-			<div><span style="float: right;"><small>Fecha y Hora de Evolucion : {{ $fecha->toDateTimeString() }}</small></span> <h4>Unidad - Piso - Cama</h4> </div>
-			
-			{!! Form::open(['id'=>'formSitioI']) !!}
-				{{-- <div class="row"> --}}
-					<div class="form-group">
-						{!! Form::hidden('id_internacion',$id_internacion,['id'=>'id_internacion','class'=>'form-control','placeholder'=>'Estado']) !!}
-					</div>
-					<div class="form-group">
-						{!! Form::hidden('id_medico',$id_medico,['id'=>'id_medico','class'=>'form-control','placeholder'=>'Estado']) !!}
-					</div>
-					
-					<div class="form-group col-sm-4 col-md-4">
-						<div class="input-group">
-							<span class="input-group-addon">Unidad</span>
-							{!! Form::select('tipo_unidad',$tipoUnidad,null,['id'=>'tipo_unidad','class'=>'form-control']) !!}
-						</div>
-					</div>
+	
+		@include('internacion.SitioInternacion')
 
-					<div class="form-group col-sm-4 col-md-4">
-				    	<div class="input-group">
-				            <span class="input-group-addon">Piso</span>
-							{!! Form::text('piso',null,['id'=>'piso','class'=>'form-control','placeholder'=>'Piso','onkeyup'=>'mayuscula(piso)']) !!}
-						</div>
-					</div>
-
-					<div class="form-group col-sm-4 col-md-4">
-				    	<div class="input-group">
-				            <span class="input-group-addon">Cama</span>
-							{!! Form::text('cama',null,['id'=>'cama','class'=>'form-control','placeholder'=>'Cama','onkeyup'=>'mayuscula(cama)']) !!}
-						</div>
-					</div>
-
-					<div class="form-group">
-						{!! Form::hidden('fecha_hora',$fecha,['id'=>'fecha_hora','class'=>'form-control','placeholder'=>'fecha']) !!}
-					</div>
-
-					<div class="form-group">
-						{!! Form::hidden('estado','AC',['id'=>'estado','class'=>'form-control','placeholder'=>'Estado']) !!}
-					</div>
-
-					<div class="form-group col-sm-10 col-md-10">
-				    	<div class="input-group">
-				            <span class="input-group-addon">Notas</span>
-							{!! Form::text('notas',null,['id'=>'notas','class'=>'form-control','placeholder'=>'Notas adicionales','onkeyup'=>'mayuscula(notas)']) !!}
-						</div>
-					</div>					
-
-					<div class="form-group col-sm-2 col-md-2">
-						{!! link_to('#','Guardar',['id'=>'guardarSitio','class'=>'btn btn-primary']) !!}
-					</div>
-
-			{!! Form::close() !!}
-		</div>
-
-		<div class="row container-fluid">
-			<h4>Evolucion</h4>
-			<div class="panel panel-default disabledTab" id="pnlEvolucion">
-				<div class="panel-body">
-					{!! Form::open(['id'=>'formEvolucion']) !!}
-						<div class="form-group">
-							{!! Form::hidden('id_internacion',$id_internacion,['id'=>'id_internacion','class'=>'form-control','placeholder'=>'Estado']) !!}
-						</div>
-													
-						<div class="row">
-							<div class="form-group col-sm-6 col-md-6">
-								<div class="input-group">
-									<span class="input-group-addon">Medico</span>
-									<select class="form-control" id="id_medico" name="id_medico">
-										<option value="0">Seleccione un Medico</option>
-						            	@foreach ($medicos as $medico)
-						                    <option value="{{ $medico->id_medico }}">{{ $medico->personas->nombre }} {{ $medico->personas->ap_paterno }} {{ $medico->personas->ap_materno }}</option>
-						                 @endforeach
-					            	</select>
-								</div>
-							</div>
-
-							<div class="form-group col-sm-6 col-md-6">
-								<div class="input-group">
-									<span class="input-group-addon">Tipo Nota</span>
-									{!! Form::select('tipo_evolucion',$tipoEvolucion,null,['id'=>'tipo_evolucion','class'=>'form-control']) !!}
-								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">Peso</span>
-									{!! Form::text('peso',null,['id'=>'peso','class'=>'form-control','placeholder'=>'Peso','onkeyup'=>'mayuscula(motivo_consulta)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">Talla</span>
-									{!! Form::text('talla',null,['id'=>'talla','class'=>'form-control','placeholder'=>'Talla','onkeyup'=>'mayuscula(historia)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">Glasgow</span>
-									{!! Form::text('glasgow',null,['id'=>'glasgow','class'=>'form-control','placeholder'=>'Glasgow','onkeyup'=>'mayuscula(motivo_consulta)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">Temp.</span>
-									{!! Form::text('temperatura',null,['id'=>'temperatura','class'=>'form-control','placeholder'=>'Temperatura','onkeyup'=>'mayuscula(temperatura)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">FC</span>
-									{!! Form::text('frecuencia_cardiaca',null,['id'=>'frecuencia_cardiaca','class'=>'form-control','placeholder'=>'FC','onkeyup'=>'mayuscula(frecuencia_cardiaca)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">FR</span>
-									{!! Form::text('frecuencia_respiratoria',null,['id'=>'frecuencia_respiratoria','class'=>'form-control','placeholder'=>'FR','onkeyup'=>'mayuscula(frecuencia_respiratoria)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">PAS</span>
-									{!! Form::text('presion_sistolica',null,['id'=>'presion_sistolica','class'=>'form-control','placeholder'=>'PAS','onkeyup'=>'mayuscula(presion_sistolica)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-3 col-md-3">
-						    	<div class="input-group">
-						            <span class="input-group-addon">PAD</span>
-									{!! Form::text('presion_diastolica',null,['id'=>'presion_diastolica','class'=>'form-control','placeholder'=>'PAD','onkeyup'=>'mayuscula(presion_diastolica)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-12 col-md-12">
-						    	<div class="input-group">
-						            <span class="input-group-addon">Subjetivo</span>
-									{!! Form::text('subjetivo',null,['id'=>'subjetivo','class'=>'form-control','placeholder'=>'Evaluacion subjetiva','onkeyup'=>'mayuscula(subjetivo)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-12 col-md-12">
-						    	<div class="input-group">
-						            <span class="input-group-addon">Objetivo</span>
-									{!! Form::text('objetivo',null,['id'=>'objetivo','class'=>'form-control','placeholder'=>'Evaluacion objetiva','onkeyup'=>'mayuscula(objetivo)']) !!}
-								</div>
-							</div>
-
-							<div class="form-group col-sm-12 col-md-12">
-						    	<div class="input-group">
-						            <span class="input-group-addon">Plan</span>
-									{!! Form::text('plan',null,['id'=>'plan','class'=>'form-control','placeholder'=>'Plan para el paciente','onkeyup'=>'mayuscula(plan)']) !!}
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="form-group col-sm-6 col-md-6">
-								<div class="input-group">
-									<span class="input-group-addon">Tipo de Conducta a Seguir</span>
-									{!! Form::select('tipo_conducta',$tipoConducta,null,['id'=>'tipo_conducta','class'=>'form-control']) !!}
-								</div>
-							</div>
-
-							<div class="form-group">
-								{!! Form::hidden('fecha_hora',$fecha,['id'=>'fecha_hora','class'=>'form-control','placeholder'=>'fecha']) !!}
-							</div>
-
-							<div class="form-group">
-								{!! Form::hidden('estadoE','AC',['id'=>'estadoE','class'=>'form-control','placeholder'=>'Estado']) !!}
-							</div>
-
-							<div class="form-group col-sm-6 col-md-6">
-								{!! link_to('#','Guardar',['id'=>'guardarEvolucion','class'=>'btn btn-primary']) !!}
-							</div>
-						</div>		
-						
-					{!! Form::close() !!}
-				</div>
-			</div>
-		</div>
+		@include('internacion.Evolucion')
 	</div>
 </div>
 @endsection
@@ -216,7 +31,7 @@
 		var fecha_hora = $('#fecha_hora').val();
 		var estado = $('#estado').val();
 		var token = $("input[name=_token]").val();
-
+		
 		var url = "{{ route('sitiointernacion.store') }}";
 
 		var dataString = {id_internacion:id_internacion, id_medico:id_medico, tipo_unidad:tipo_unidad, piso:piso, cama:cama, notas:notas, fecha_hora:fecha_hora, estado:estado, token:token};
@@ -290,7 +105,7 @@
 		  					break;
 		  				case "TCI2":
 		  					//transferencia a otra unidad
-		  					document.location.href = "{{ url('/cambiarsitiointernacion') }}/"+id_internacion+""+id_medico+"";
+		  					document.location.href = "{{ url('/cambiarsitiointernacion') }}/"+id_internacion+"/"+id_medico+"";
 		  					break;
 		  				case "TCI3":
 		  					//transferencia a otra institucion

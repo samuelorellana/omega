@@ -41,7 +41,8 @@
 		                        <td>{{ $ordeni->lugar_internacion }}</td>
 		                        <td>{{ $ordeni->medico->personas->nombre }} {{ $ordeni->medico->personas->ap_paterno }}</td>               
 		                        <td>
-		                            <a href="{{ route('ordenesI.show',$ordeni->id_orden_internacion) }}">Internar</a>
+		                            {{-- <a href="{{ route('ordenesI.show',$ordeni->id_orden_internacion) }}">Internar</a> --}}
+		                            <a href="#" onclick="confirmar('{{ $ordeni->id_orden_internacion }}');">Internar</a>
 		                        </td>
 		                    </tr>
 		                    @endforeach
@@ -58,8 +59,69 @@
 
 			</div>
 		</div>
+
+		<!-- lista de internaciones -->
+		<div class="container-fluid">
+			<h3>Internaciones vigentes</h3>
+			<div class="table-responsive">
+		        <table class="table table-bordered table-condensed tabla_small">
+		            <thead>
+		            	<th>Fecha</th>
+	            		<th>Unidad</th>
+	            		<th>Piso</th>
+	                    <th>Cama</th>
+	                    <th>Tipo</th>
+	                    <th>Paciente</th>
+	                    <th>Medico</th>
+	                </thead>
+		            <tbody>
+	                    @foreach($internaciones as $internacion)
+	                    <tr>
+	                    	<td>{{ $internacion->fecha_hora }}</td>
+	                    	<td>{{ $internacion->ultimositio->tipo_unidad }}</td>
+	                    	<td>{{ $internacion->ultimositio->piso }}</td>
+	                    	<td>{{ $internacion->ultimositio->cama }}</td>
+	                        @if($internacion->tipo_internacion == "TIIM")
+	                            <td {{-- style="color: #009600;" --}}>TRATAMIENTO MEDICO</td>
+	                        @elseif($internacion->tipo_internacion == "TIIQ")
+	                            <td {{-- style="color: #FF0000;" --}}>TRATAMIENTO QUIRURGICO</td>
+	                        @elseif($internacion->tipo_internacion == "TIIO")
+	                            <td>INTERNACION PARA OBSERVACION</td>
+	                        @elseif($internacion->tipo_internacion == "TIIA")
+	                            <td>TRATAMIENTO MEDICO AMBULATORIO</td>
+	                        @elseif($internacion->tipo_internacion == "TIIB")
+	                            <td>TRATAMIENTO QUIRURGICO AMBULATORIO</td>
+	                        @endif
+	                        <td>{{ $internacion->persona->nombre }} {{ $internacion->persona->ap_paterno }}</td>
+	                        <td>{{ $internacion->medico->personas->nombre }} {{ $internacion->medico->personas->ap_paterno }}</td>
+
+	                    </tr>
+	                    @endforeach
+	                </tbody>
+		        </table>
+			</div>
+		</div>
 	</div>
 </div>
 
 
 @endsection
+
+@section('javascript')
+<script>
+
+	var confirmar = function(id)
+	{
+		if(confirm('Desea crear Internacion para este paciente?...\n(Importante: al continuar se eliminara esta orden pendiente) \n *** NO SE PUEDE DESHACER ESTA ELIMINACION! ***')==true)
+		{
+			document.location.href = "{{ url('ejecutarinternacion') }}/"+id+"";
+		}
+		else
+		{
+			alert('La orden aun esta pendiente...');
+		}
+	}
+	
+</script>
+
+@stop
