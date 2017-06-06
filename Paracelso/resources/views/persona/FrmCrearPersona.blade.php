@@ -13,8 +13,9 @@
 	</div>
 
 	<div class="panel-body">
+	<body onload="alcargar();">
 		<div class="container-fluid">
-			{!! Form::open(['route'=>'persona.store','method'=>'POST','role'=>'form']) !!}
+			{!! Form::open(['route'=>'persona.store','method'=>'POST','role'=>'form','enctype'=>'multipart/form-data']) !!}
 				
 				{{-- <input type="hidden" name="codigo" value="{{ $codigo_transaccion }}" id="codigo"> --}}
 				
@@ -83,7 +84,7 @@
 <!-- Aqui fin Datos personales -->
 
 					<div class="col-md-4">
-						<h4><b>Datos contacto</b></h4>
+						<h4><b>Datos Contacto</b></h4>
 
 						<div class="form-group">
 							<div class="input-group">
@@ -137,7 +138,7 @@
 <!-- Aqui fin Datos contacto -->				
 
 					<div class="col-md-4">
-						<h4><b>Datos seguro</b></h4>
+						<h4><b>Datos Seguro</b></h4>
 						
 						{{-- <div class="form-group">
 							<div class="input-group">
@@ -167,6 +168,18 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-4">
+						<h4><b>Imagen</b></h4>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<div class="thumbnail" id="foto">
+								<a href="" class="btn btn-default" id="eligeArchivo">Elegir Foto</a>
+								<img src="imagenes/iconos/silueta.png" alt="">
+							</div>
+							<span class="alert alert-info" id="infoArchivo">No se ha elegido archivo</span>
+							<input type="file" name="imagenpersona" id="imagenpersona">
+
+						</div>
+					</div>
 				</div>
 
 				{!! Form::submit('Guardar',['nombre'=>'guardar','id'=>'guardar','class'=>'btn btn-info btn-sm m-t-10']) !!}
@@ -174,8 +187,9 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
+<script type="text/javascript" src="{{asset('js/utilitarios.js')}}"></script>
+</body>
 </div>
-
 @endsection
 
 
