@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Repositories;
+use Illuminate\Support\Collection as Collection;
 
 use App\Models\personas;
+use App\Models\medicos;
 use Carbon\Carbon;
 
 class PersonaRepository
@@ -21,8 +23,9 @@ class PersonaRepository
         return $personas;
 	}
 
-    public function RepMedicos($medicos)
+    public function RepMedicos()
     {
+        $medicos = medicos::locales()->get();
         $persona=array();
         foreach($medicos as $medico)
         {
@@ -31,8 +34,8 @@ class PersonaRepository
             $personas['nombreM'] = $medico->personas->nombre.' '.$medico->personas->ap_paterno.' '.$medico->personas->ap_materno;
             array_push($persona,$personas);
         }
-
-        return $persona;
+        $medico = Collection::make($persona);
+        return $medico;
     }
 
 }

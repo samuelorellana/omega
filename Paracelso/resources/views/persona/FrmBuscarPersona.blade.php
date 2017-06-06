@@ -5,10 +5,10 @@
 	@include('Errores')
 	<div class="panel-heading">
 		<div class="container-fluid">
-			<h1>
+			<h3>
 				Busqueda de Pacientes
 				{{-- <span style="float: right; font-weight: x-small;">Cod: {{ $codigo_transaccion }}</span> --}}
-			</h1>
+			</h3>
 		</div>
 		<div>
 			<a href="javascript:window.history.back();" class="btn btn-warning">Atras</a>

@@ -14,7 +14,7 @@
                 @elseif($diagnostico->agudo_cronico == "C")
                     <td>CRONICO</td>
                 @endif
-                <td>{{ $diagnostico->comentarios }}</td>
+                <td>{{ $diagnostico->comentario }}</td>
                 <!-- <td><a href="#" onclick="eliminarD('{ $diagnostico->id_diagnostico_historia}}','diagnosticosH','ListaDiagnosticos')"> [Eliminar]</a></td> -->
                 <td><a href="#" onclick="eliminarD('{{ $diagnostico->id_diagnostico_historia}}')"> [Eliminar]</a></td>
             </tr>

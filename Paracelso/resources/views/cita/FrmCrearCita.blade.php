@@ -2,12 +2,11 @@
 @section('content')
 
 <div class="container-fluid  marco_trabajo">
-    <h3><strong>Crear Cita para:</strong></h3>
+    <h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> Crear Cita para:</h3>
     @include('persona.LstDatosBasicos')
 </div>
 
-<div class="container-fluid  marco_trabajo">
-	<div class="row">
+<div class="container-fluid">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
 				@include('Errores')
@@ -20,12 +19,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Medico</span>
-								<select class="form-control" id="id_medico" name="id_medico">
-								<option value="0">Seleccione un Medico</option>
-				            	@foreach ($medicos as $medico)
-				                    <option value="{{ $medico->id_medico }}">{{ $medico->personas->nombre }} {{ $medico->personas->ap_paterno }} {{ $medico->personas->ap_materno }}</option>
-				                 @endforeach
-				            	</select>
+								{!! Form::select('id_medico',$medicos,null,['id'=>'id_medico','class'=>'form-control']) !!}
 							</div>
 						</div>
 
@@ -74,7 +68,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 @endsection

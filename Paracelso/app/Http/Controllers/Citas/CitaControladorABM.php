@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
 use App\Models\citas;
-use App\Models\medicos;
+//use App\Models\medicos;
 
 use App\Http\Controllers\Administracion\BitacoraControlador;
 
@@ -43,7 +43,7 @@ class CitaControladorABM extends Controller
 
         Carbon::setLocale('es');
         $fecha=Carbon::now();
-        $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
         $citas = $this->citas->RepCitaBuscar($fecha,'','');
         return view('cita.FrmBuscarCitas',compact('fecha','medicos','citas'));
     }
@@ -111,7 +111,7 @@ class CitaControladorABM extends Controller
     public function edit($id)
     {
         //
-        $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
         $cita = citas::FindOrFail($id);
 
         return view('cita.FrmEditarCita',compact('medicos','cita'));

@@ -5,7 +5,7 @@
 	@include('Errores')
 
 	<div class="panel-heading">
-		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> <strong>Crear Consulta Medica para:</strong></h3>
+		<h3><a href="javascript:window.history.back();" class="btn btn-warning">Atras</a> Crear Consulta Medica para:</h3>
 		@include('persona.LstDatosBasicos')
 	</div>
 
@@ -30,12 +30,7 @@
 					<div class="form-group col-sm-6 col-md-6">
 						<div class="input-group">
 							<span class="input-group-addon">Medico</span>
-							<select class="form-control" id="id_medico" name="id_medico">
-								<option value="0">Seleccione un Medico</option>
-				            	@foreach ($medicos as $medico)
-				                    <option value="{{ $medico->id_medico }}">{{ $medico->personas->nombre }} {{ $medico->personas->ap_paterno }} {{ $medico->personas->ap_materno }}</option>
-				                 @endforeach
-			            	</select>
+							{!! Form::select('id_medico',$medicos,null,['id'=>'id_medico','class'=>'form-control']) !!}
 						</div>
 					</div>
 				{{-- </div> --}}
@@ -85,7 +80,7 @@
 								{!! Form::text('revision_general',null,['id'=>'revision_general','class'=>'form-control','placeholder'=>'Revision fisica general','onkeyup'=>'mayuscula(revision_general)']) !!}
 							</div>
 						</div>
-						<button type="button" id="mostrarP" class="btn btn-primary btn-sm col-sm-2 col-md-2">Ex.Segmentario</button>
+						<button type="button" id="mostrarP" class="btn btn-info btn-sm col-sm-2 col-md-2">Ex.Segmentario</button>
 						<button type="button" id="ocultarP" class="btn btn-success btn-sm col-sm-2 col-md-2">Ocultar</button>
 
 						<div class="row container-fluid" id="EFS">
@@ -127,7 +122,9 @@
 							{!! Form::hidden('estadoR','AC',['id'=>'estadoR','class'=>'form-control','placeholder'=>'Estado']) !!}
 						</div>
 
-						{!! link_to('#','Guardar',['id'=>'guardarR','class'=>'btn btn-primary btn-sm m-t-10']) !!}
+						<div class="row">
+							{!! link_to('#','Guardar',['id'=>'guardarR','class'=>'btn btn-primary btn-sm m-t-10']) !!}
+						</div>
 					{!! Form::close() !!}
 				</div>
 			</div>

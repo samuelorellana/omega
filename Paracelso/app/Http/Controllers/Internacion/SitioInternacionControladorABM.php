@@ -12,11 +12,18 @@ use App\Http\Controllers\Administracion\BitacoraControlador;
 
 use App\Models\Dominio;
 use App\Models\sitios_internaciones;
-use App\Models\medicos;
+
 use Carbon\Carbon;
+use App\Repositories\PersonaRepository;
 
 class SitioInternacionControladorABM extends Controller
 {
+    protected $personas;
+
+    public function __construct(PersonaRepository $personas)
+    {
+        $this->personas = $personas;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -115,7 +122,7 @@ class SitioInternacionControladorABM extends Controller
     {
         Carbon::setLocale('es');
         $fecha=Carbon::now();
-        $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
         $tipoUnidad = Dominio::nombre('TIPO ESPECIALIDAD')->lists('descripcion','codigo_dominio');
         $tipoEvolucion = Dominio::nombre('TIPO EVOLUCION')->lists('descripcion','codigo_dominio');
         $tipoConducta = Dominio::nombre('TIPO CONDUCTAI')->lists('descripcion','codigo_dominio');
@@ -124,12 +131,16 @@ class SitioInternacionControladorABM extends Controller
 
     public function cambiarsitiointernacion($idi,$idm)
     {
+        $origen = sitios_internaciones::where('id_internacion',$idi)->get()->last();
+
+        $codigoUnidad = Dominio::codigo($origen->tipo_unidad)->lists('descripcion');
+
         Carbon::setLocale('es');
         $fecha=Carbon::now();
-        // $medicos=medicos::locales()->get();
+        $medicos = $this->personas->RepMedicos()->lists('nombreM','id_medico');
         $tipoUnidad = Dominio::nombre('TIPO ESPECIALIDAD')->lists('descripcion','codigo_dominio');
-        // $tipoEvolucion = Dominio::nombre('TIPO EVOLUCION')->lists('descripcion','codigo_dominio');
-        // $tipoConducta = Dominio::nombre('TIPO CONDUCTAI')->lists('descripcion','codigo_dominio');
-        //return view('internacion.FrmCrearNotaInternacion',['fecha'=>$fecha,'medicos'=>$medicos,'id_internacion'=>$idi,'id_medico'=>$idm,'tipoUnidad'=>$tipoUnidad,'tipoEvolucion'=>$tipoEvolucion,'tipoConducta'=>$tipoConducta]);
+        
+        return view('internacion.FrmTransferenciaUnidad',['codigoUnidad'=>$codigoUnidad,'tipoUnidad'=>$tipoUnidad,'fecha'=>$fecha,'medicos'=>$medicos,'id_internacion'=>$idi,'id_medico'=>$idm,'origen'=>$origen]);
     }
+
 }

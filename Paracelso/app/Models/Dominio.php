@@ -33,4 +33,9 @@ class Dominio extends Model
     {
         $query->where('nombre',$nombre)->orderBy('id_dominio','asc');
     }
+
+    public function scopeCodigo($query,$codigo)
+    {
+        $query->where('codigo_dominio',$codigo)->get();
+    }
 }

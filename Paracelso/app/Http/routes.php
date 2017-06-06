@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware' => ['auth']],function(){
 
 	route::get('prueba',['as'=>'prueba','uses'=>'PruebaControlador@index']);
+	route::get('prueba2',['as'=>'prueba2','uses'=>'PruebaControlador@indexa']);
 
 	Route::resource('dominios','Parametricas\DominiosControlador');
 	Route::resource('seguros','Parametricas\SeguroControladorABM');
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth']],function(){
 	route::resource('persona','Personas\PersonaControladorABM');
 	route::get('BuscarPersona/{page?}','Personas\PersonaControlador@BuscarPersona');
 	route::get('/SeleccionarPersona/{id_persona}',['as'=>'SeleccionarPersona','uses'=>'Personas\PersonaControlador@SeleccionarPersona']);
+	Route::get('/imagenpersona/{id_persona}','Personas\PersonaControladorABM@DesplegarImagenPersona');
 
 	route::resource('usuario','Administracion\UsuarioControladorABM');
 
@@ -69,6 +71,7 @@ Route::group(['middleware' => ['auth']],function(){
 
 	route::resource('ordenesI','Internacion\OrdenesIControladorABM');
 	route::get('/ordeninternacion/{idc}/{idm}/{codigo}',['as'=>'ordeninternacion','uses'=>'Internacion\OrdenesIControladorABM@ordeninternacion']);
+	route::get('/ejecutarinternacion/{id}',['as'=>'ejecutarinternacion','uses'=>'Internacion\OrdenesIControladorABM@ejecutarinternacion']);
 
 	route::resource('ordenesT','Transferencia\OrdenesTControladorABM');
 	route::get('/ordentransferencia/{idc}/{idm}/{codigo}',['as'=>'ordentransferencia','uses'=>'Transferencia\OrdenesTControladorABM@ordentransferencia']);

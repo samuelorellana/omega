@@ -35,4 +35,20 @@ class internaciones extends Model
     {
     	return $this->belongsTo(instituciones::class,'codigo_institucion','codigo_institucion');
     }
+
+    public function sitio()
+    {
+        return $this->hasMany(sitios_internaciones::class,'id_internacion','id_internacion');
+    }
+
+    public function ultimositio()
+    {
+        return $this->hasOne(sitios_internaciones::class,'id_internacion','id_internacion')->latest();
+    }
+
+    public function evolucion()
+    {
+        return $this->hasMany(evoluciones::class,'id_internacion','id_internacion');
+    }
+
 }

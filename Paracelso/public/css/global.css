@@ -1157,3 +1157,13 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   text-align: center;
   color:#FFFFFF;
 }
+
+.thumb{
+  max-width: 80px;
+  max-height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+  float: left;
+  border: thin solid #909090;
+  border-radius: 5px;
+}
